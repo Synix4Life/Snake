@@ -1,7 +1,7 @@
 #pragma once
 
-#include <tuple>
 #include <random>
+#include <tuple>
 #include <time.h>
 
 enum Direction{
@@ -20,7 +20,7 @@ enum Direction{
     ) ? false : true;
 }
 
-[[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size) {
+[[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size) noexcept{
     srand(time(0));
 
     int max_x = std::get<0>(size);

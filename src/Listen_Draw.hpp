@@ -1,23 +1,21 @@
 #pragma once
 
 #include <iostream>
+#include <tuple>
+#include <vector>
+#include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <vector>
-#include <tuple>
-
 #include "Field.hpp"
+
+#ifdef draw
+#error "draw is already defined or declared before this file"
+#endif
 
 
 // --------------- Listen --------------- //
 
-/**
- * Method to listen to a key input (non-blocking)
- * 
- * @return Pressed key, or '\0' if no key is pressed
- */
-static char key_listener() {
+[[nodiscard]] static char key_listener() {
     char buf = 0;
     struct termios old = {0}, newt = {0};
 

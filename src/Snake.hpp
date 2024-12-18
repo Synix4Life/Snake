@@ -1,8 +1,9 @@
 #pragma once
 
-#include <vector>
-#include <tuple>
+#include <algorithm>
 #include <stdexcept>
+#include <tuple>
+#include <vector>
 
 #include "Essentials.hpp"
 
@@ -16,7 +17,7 @@ class Snake{
             this->direction = direction;
         }
 
-        void update(const bool is_new){
+        void update(const bool is_new) noexcept{
             int x = (direction == RIGHT) ? std::get<0>(parts[0]) +1 : ( (direction == LEFT) ? std::get<0>(parts[0])-1 : std::get<0>(parts[0]) ); 
             int y = (direction == UP) ? std::get<1>(parts[0])-1 : ( (direction == DOWN) ? std::get<1>(parts[0])+1 : std::get<1>(parts[0]) ); 
             parts.emplace(parts.begin(), x, y);
@@ -25,26 +26,28 @@ class Snake{
             }
         }
 
-        void change_dir(Direction new_dir){
+        void change_dir(Direction new_dir) noexcept{
             direction = new_dir;
         }
 
-        [[nodiscard]] std::vector<std::tuple<int, int>> get(){
+        [[nodiscard]] std::vector<std::tuple<int, int>> get() const noexcept{
             return parts;
         }
 
-        std::tuple<int, int> operator[](int pos){
+        std::tuple<int, int> operator[](int pos) const{
             if(pos >= parts.size()){
                 throw std::runtime_error("Illegal Access");
             }
             return parts[pos];
         }
         
-        [[nodiscard]] int size(){
+        [[nodiscard]] int size() const noexcept{
             return parts.size();
         }
 
-        [[nodiscard]] Direction get_direction(){ return direction; }
+        [[nodiscard]] Direction get_direction() const noexcept{ 
+            return direction; 
+        }
         
         [[nodiscard]] std::vector<std::tuple<int, int>> order(){           
             std::vector<std::tuple<int, int>> res;
@@ -77,5 +80,11 @@ class Snake{
                 }
 
             return res;
+        }
+
+        [[nodiscard]] const bool snake_collision() const noexcept{
+            int x = (direction == RIGHT) ? std::get<0>(parts[0]) +1 : ( (direction == LEFT) ? std::get<0>(parts[0])-1 : std::get<0>(parts[0]) ); 
+            int y = (direction == UP) ? std::get<1>(parts[0])-1 : ( (direction == DOWN) ? std::get<1>(parts[0])+1 : std::get<1>(parts[0]) ); 
+            return (parts.end() != std::find(parts.begin(), parts.end(), std::make_tuple(x,y)));
         }
 };
