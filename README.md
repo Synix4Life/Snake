@@ -1,9 +1,17 @@
 # Snake
 
+#### General
+
 ![License](https://img.shields.io/badge/License-MIT-%2300599C.svg?style=for-the-badge)
-![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![Makefile](https://img.shields.io/badge/Makefile-%2300599C.svg?style=for-the-badge&logo=make&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-2.0-%2300599C.svg?style=for-the-badge)
+
+#### Languages
+
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![C](https://img.shields.io/badge/C-gray?style=for-the-badge&logo=c&logoColor=white)
+![Makefile](https://img.shields.io/badge/Makefile-%23008FBA.svg?style=for-the-badge&logo=make&logoColor=white)
+
+#### Dev
 
 ![Bugs](https://img.shields.io/badge/Known_Bugs-2-%2300599C.svg?style=for-the-badge)
 ![Test](https://img.shields.io/badge/Tests_Passed-0/0-%2300599C.svg?style=for-the-badge)
@@ -79,3 +87,6 @@ Therefore, it should be installed on youre system. However, you can also play th
   - Runtime improvement using OpenMP
   - Makefile added
   - Customization using command- line inputs
+
+    - $\textsf{\color{#4F8BBF}Version 2.0.1}$
+        - README fixes
