@@ -3,7 +3,7 @@
 #### General
 
 ![License](https://img.shields.io/badge/License-MIT-%2300599C.svg?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.0-%2300599C.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.0.2-%2300599C.svg?style=for-the-badge)
 
 #### Languages
 
@@ -86,7 +86,9 @@ Therefore, it should be installed on youre system. However, you can also play th
   - Snake Collision added
   - Runtime improvement using OpenMP
   - Makefile added
-  - Customization using command- line inputs
+  - Customization using command-line inputs
 
     - $\textsf{\color{#4F8BBF}Version 2.0.1}$
         - README fixes
+    - $\textsf{\color{#4F8BBF}Version 2.0.2}$
+      - Small fixes

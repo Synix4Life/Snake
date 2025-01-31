@@ -68,7 +68,7 @@ class Field{
         int operator[](int pos) const noexcept{
             return (pos==0) ? std::get<0>(size) : std::get<1>(size);
         }
-        Snake get_snake() const noexcept{
+        [[nodiscard]] Snake get_snake() const noexcept{
             return snake;
         }
         [[nodiscard]] bool flag() const noexcept{

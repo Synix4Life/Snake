@@ -1,8 +1,8 @@
 #pragma once
 
-/* ----- Global variables for parrallelization ----- */
-static bool parallel = false;
-static int threads = 4;
+/* ----- Global variables for parallelization ----- */
+[[maybe_unused]] static bool parallel = false;
+[[maybe_unused]] static int threads = 4;
 
 /* ----- Global variables for game speed ----- */
 static int game_speed = 500;

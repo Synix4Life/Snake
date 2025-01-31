@@ -15,6 +15,7 @@ clean:
 	rm -f *.o out
 
 run:
+	clear
 	@echo "Type 'make help' for Instructions"
 	./out $(ARGS)
 

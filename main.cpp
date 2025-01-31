@@ -5,7 +5,7 @@
 
 #include "src/Listen_Draw.hpp"
 #include "src/Essentials.hpp"
-#include "src/Snake.hpp"
+//#include "src/Snake.hpp"
 #include "src/Field.hpp"
 #include "src/Global.h"
 
@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
             dynamic_speed = true;
         }
         else{
-            printf("Unknow command\n");
+            std::cout << "Unknown command";
             exit(1);
         }
     }
