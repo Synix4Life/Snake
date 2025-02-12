@@ -2,7 +2,7 @@
 
 #include <random>
 #include <tuple>
-#include <time.h>
+#include <ctime>
 
 enum Direction{
     UP,
@@ -11,7 +11,7 @@ enum Direction{
     RIGHT
 };
 
-[[nodiscard]] static bool valid_dir(Direction direction, Direction new_direction) noexcept{
+[[nodiscard]] static bool valid_dir(const enum Direction direction, const enum Direction new_direction) noexcept{
     return !(
             (direction == UP && new_direction == DOWN) ||
             (direction == DOWN && new_direction == UP) ||
@@ -21,7 +21,7 @@ enum Direction{
 }
 
 [[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size) noexcept{
-    srand(time(0));
+    srand(time(nullptr));
 
     int max_x = std::get<0>(size);
     int max_y = std::get<1>(size);

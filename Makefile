@@ -1,23 +1,34 @@
 CC = g++
 CFLAGS = -std=c++17 -fopenmp -O2
-SRC = main.cpp
-OBJ = main.o
 
-all: out
+SRC_DIR = src
+BUILD_DIR = build/obj
+BIN_DIR = build/bin
 
-out: $(OBJ)
-	$(CC) $(CFLAGS) -o out $(OBJ)
+SRC = $(wildcard $(SRC_DIR)/*.cpp) main.cpp
+OBJ = $(BUILD_DIR)/main.o $(BUILD_DIR)/Snake.o $(BUILD_DIR)/Field.o
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -p $@
+all: $(BIN_DIR)/out
+
+$(BIN_DIR)/out: $(OBJ) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/out $(OBJ)
+
+$(BUILD_DIR) $(BIN_DIR):
+	mkdir -p $@
+
+$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o out
+	rm -rf build
 
 run:
 	clear
 	@echo "Type 'make help' for Instructions"
-	./out $(ARGS)
+	$(BIN_DIR)/out $(ARGS)
 
 help:
 	@echo "===================================="

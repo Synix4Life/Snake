@@ -5,7 +5,6 @@
 
 #include "src/Listen_Draw.hpp"
 #include "src/Essentials.hpp"
-//#include "src/Snake.hpp"
 #include "src/Field.hpp"
 #include "src/Global.h"
 

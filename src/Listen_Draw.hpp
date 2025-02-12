@@ -62,14 +62,14 @@ const std::string RED = "\033[41m";
 const std::string GRAY = "\033[100m";
 const std::string RESET = "\033[0m";
 
-static void clear_lines(int n) noexcept{
+static void clear_lines(const int n) noexcept{
     for (int i = 0; i < n; ++i) {
         std::cout << "\033[A";  
         std::cout << "\033[K";
     }
 }
 
-static void draw(Field& field, bool alive) noexcept{
+static void draw(const Field& field, const bool alive) noexcept{
     std::vector<std::tuple<int, int>> snake_pos = field.get_snake().order();
     int snake_pos_pointer = 0;
     std::tuple<int, int> apple_pos = field.get_apple();
