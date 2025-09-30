@@ -9,6 +9,7 @@ void Snake::update(const bool is_new) noexcept{
     int x = (direction == RIGHT) ? std::get<0>(parts[0]) +1 : ( (direction == LEFT) ? std::get<0>(parts[0])-1 : std::get<0>(parts[0]) ); 
     int y = (direction == UP) ? std::get<1>(parts[0])-1 : ( (direction == DOWN) ? std::get<1>(parts[0])+1 : std::get<1>(parts[0]) ); 
     parts.emplace(parts.begin(), x, y);
+    this->head = {x,y};
     if(!is_new){
         parts.pop_back();
     }

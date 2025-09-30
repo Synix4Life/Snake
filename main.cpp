@@ -34,14 +34,7 @@ void loop(){
 int main(int argc, char* argv[]) {    
     
     for(int i=1; i<argc; i++){
-        if(strcmp(argv[i], "--parallel") == 0){
-            parallel = true;
-        }
-        else if(strcmp(argv[i], "--num") == 0){
-            i++;
-            threads = atoi(argv[i]);
-        }
-        else if(strcmp(argv[i], "--speed") == 0){
+        if(strcmp(argv[i], "--speed") == 0){
             i++;
             game_speed = (strcmp(argv[i], "slow") == 0) ? 700 : (strcmp(argv[i], "fast") == 0) ? 300 : 500;
         }

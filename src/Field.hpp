@@ -1,10 +1,9 @@
 #pragma once
 
 #include <algorithm>
+#include <random>
 #include <tuple>
 #include <vector>
-
-#include <omp.h>
 
 #include "Essentials.hpp"
 #include "Snake.hpp"
@@ -16,6 +15,7 @@ class Field{
         std::tuple<int, int> apple_pos;
         Snake snake;
         bool breakFlag = false;
+        std::mt19937 gen;
 
         void set_apple();
 
@@ -27,7 +27,10 @@ class Field{
         Field(int size_x, int size_y): 
             size(size_x, size_y), 
             snake({1, 1}, RIGHT),
-            apple_pos(generate_random_position({size_x, size_y})) {}
+            gen(std::random_device{}())
+        {
+            apple_pos = generate_random_position(size, gen);
+        }
 
         void check_and_set(Direction dir);
 

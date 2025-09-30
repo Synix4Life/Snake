@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <tuple>
 
-#include <omp.h>
-
 #include "Essentials.hpp"
 #include "Global.h"
 
@@ -12,17 +10,14 @@ void Field::set_apple(){
     bool touch;
     do{
         touch = false;
-        apple_pos = generate_random_position(size);
+        apple_pos = generate_random_position(size, gen);
+
         auto it = std::find(snake.get().begin(), snake.get().end(), apple_pos);
-        if(it == snake.get().end()){
-            break;
-        }
-        #pragma omp parallel for num_threads(threads) if(parallel)
-        for(int i=0; i<snake.size(); i++){
-            if(snake[i] == apple_pos){
-                #pragma omp critical
-                touch = true;
-            }
+        if(
+            it != snake.get().end() 
+            || apple_pos == next_head_pos(snake.get_direction(), snake.get_head())
+        ){
+            touch = true;
         }
     }while(touch);
 }

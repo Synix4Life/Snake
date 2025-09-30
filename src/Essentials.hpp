@@ -20,14 +20,20 @@ enum Direction{
     );
 }
 
-[[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size) noexcept{
+[[nodiscard]] static std::tuple<int, int> next_head_pos(Direction direction, std::tuple<int, int> head){
+    int x = (direction == RIGHT) ? std::get<0>(head) +1 : ( (direction == LEFT) ? std::get<0>(head)-1 : std::get<0>(head) );
+    int y = (direction == UP) ? std::get<1>(head)-1 : ( (direction == DOWN) ? std::get<1>(head)+1 : std::get<1>(head) );
+    return {x,y};
+}
+
+[[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size, std::mt19937& gen) noexcept{
     srand(time(nullptr));
 
     int max_x = std::get<0>(size);
     int max_y = std::get<1>(size);
 
-    int rand_x = rand() % max_x;
-    int rand_y = rand() % max_y;
+    std::uniform_int_distribution<> dist_x(0, max_x-1);
+    std::uniform_int_distribution<> dist_y(0, max_y-1);
 
-    return {rand_x, rand_y};
+    return {dist_x(gen), dist_y(gen)};
 }

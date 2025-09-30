@@ -11,10 +11,12 @@
 class Snake{
         std::vector<std::tuple<int,int>> parts;
         Direction direction;
+        std::tuple<int, int> head;
     
     public:
         Snake(std::tuple<int, int> start_pos, enum Direction direction){
             parts.push_back(start_pos);
+            this->head = start_pos;
             this->direction = direction;
         }
 
@@ -41,6 +43,10 @@ class Snake{
 
         [[nodiscard]] Direction get_direction() const noexcept{ 
             return direction; 
+        }
+
+        [[nodiscard]] std::tuple<int, int> get_head() const noexcept{
+            return head;
         }
         
         [[nodiscard]] std::vector<std::tuple<int, int>> order();

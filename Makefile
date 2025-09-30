@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++17 -fopenmp -O2
+CFLAGS = -std=c++17 -O2
 
 SRC_DIR = src
 BUILD_DIR = build/obj
@@ -8,7 +8,7 @@ BIN_DIR = build/bin
 SRC = $(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJ = $(BUILD_DIR)/main.o $(BUILD_DIR)/Snake.o $(BUILD_DIR)/Field.o
 
-all: $(BIN_DIR)/out
+all: $(BIN_DIR)/out run
 
 $(BIN_DIR)/out: $(OBJ) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/out $(OBJ)
@@ -36,8 +36,6 @@ help:
 	@echo "===================================="
 	@echo "Usage: make run ARGS='<arguments>'"
 	@echo "Arguments:"
-	@echo "  --parallel          : Makes program parallel"
-	@echo "    --num <int>       : The number of threads to use (default: 4)"
 	@echo "  --speed <slow/fast> : Adjusts the game speed"
 	@echo "  --dynamic           : Makes the game speed dynamic (independent from --speed)"
 	@echo "===================================="
