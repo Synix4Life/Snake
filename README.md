@@ -3,7 +3,7 @@
 #### General
 
 ![License](https://img.shields.io/badge/License-MIT-%23f34b7d.svg?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.2.0-%23f34b7d.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.2.1-%23f34b7d.svg?style=for-the-badge)
 
 #### Languages
 
@@ -92,3 +92,6 @@ No specific requirements
     - Removed parallalism (redundant)
     - Fixed apple_pos delivering useless position
     - Added mt19937 random algorithm for better randomness
+    - $\textsf{\color{#f34b7d}Version 2.2.1}$
+      - Makefile improvements
+      - Global variables corrected (`inline`)

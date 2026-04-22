@@ -8,10 +8,15 @@ BIN_DIR = build/bin
 SRC = $(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJ = $(BUILD_DIR)/main.o $(BUILD_DIR)/Snake.o $(BUILD_DIR)/Field.o
 
-all: $(BIN_DIR)/out run
+.PHONY: all build clean run help
+
+all: $(BIN_DIR)/out
+
+build: all
 
 $(BIN_DIR)/out: $(OBJ) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/out $(OBJ)
+	@echo "Binary is available at $(BIN_DIR)/out, or via 'make run'"
 
 $(BUILD_DIR) $(BIN_DIR):
 	mkdir -p $@
@@ -24,6 +29,9 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 
 clean:
 	rm -rf build
+
+build:
+	all
 
 run:
 	clear
