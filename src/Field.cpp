@@ -6,6 +6,9 @@
 #include "Essentials.hpp"
 #include "Global.h"
 
+
+// --------------- METHODS --------------- //
+
 void Field::set_apple(){
     bool touch;
     do{
@@ -25,7 +28,7 @@ void Field::set_apple(){
 void Field::check_and_set(Direction dir){
     bool got_apple = false;
     for(int i=0; i<snake.size(); i++){
-        std::tuple<int, int> current = snake[i];
+        point current = snake[i];
         if(current == apple_pos){
             got_apple = true;
             set_apple();

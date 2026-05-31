@@ -4,6 +4,10 @@
 #include <tuple>
 #include <ctime>
 
+
+/**
+ * Enum for the direction the snake is facing
+ */
 enum Direction{
     UP,
     DOWN,
@@ -11,6 +15,33 @@ enum Direction{
     RIGHT
 };
 
+
+/**
+ * Defines a point in the grid
+ */
+struct point{
+    int x;
+    int y;
+
+    point(): x(-1), y(-1) {}
+    point(int x, int y): x(x), y(y) {}
+
+    bool operator<(const point& other) const {
+        return std::tie(x, y) < std::tie(other.x, other.y);
+    }
+    
+    bool operator==(const point& other) const {
+        return x == other.x && y == other.y;
+    }
+};
+
+
+/**
+ * Check if the new direction is valid
+ * @param direction The original direction
+ * @param new_direction If the new direction is valid regarding the old direction
+ * @return If it is valid
+ */
 [[nodiscard]] static bool valid_dir(const enum Direction direction, const enum Direction new_direction) noexcept{
     return !(
             (direction == UP && new_direction == DOWN) ||
@@ -20,13 +51,27 @@ enum Direction{
     );
 }
 
-[[nodiscard]] static std::tuple<int, int> next_head_pos(Direction direction, std::tuple<int, int> head){
-    int x = (direction == RIGHT) ? std::get<0>(head) +1 : ( (direction == LEFT) ? std::get<0>(head)-1 : std::get<0>(head) );
-    int y = (direction == UP) ? std::get<1>(head)-1 : ( (direction == DOWN) ? std::get<1>(head)+1 : std::get<1>(head) );
-    return {x,y};
+
+/**
+ * Calculate the next head position
+ * @param direction The direction the snake is facing
+ * @param head The current head of the snake
+ * @return The new head
+ */
+[[nodiscard]] static point next_head_pos(Direction direction, point head){
+    int x = (direction == RIGHT) ? head.x+1 : ( (direction == LEFT) ? head.x-1 : head.x );
+    int y = (direction == UP) ? head.y-1 : ( (direction == DOWN) ? head.y+1 : head.y );
+    return point(x,y);
 }
 
-[[nodiscard]] static std::tuple<int, int> generate_random_position(const std::tuple<int, int>& size, std::mt19937& gen) noexcept{
+
+/**
+ * Generate a random apple position
+ * @param size Board size
+ * @param gen The random number generator
+ * @return The new apple position
+ */
+[[nodiscard]] static point generate_random_position(const std::tuple<int, int>& size, std::mt19937& gen) noexcept{
     srand(time(nullptr));
 
     int max_x = std::get<0>(size);
@@ -35,5 +80,5 @@ enum Direction{
     std::uniform_int_distribution<> dist_x(0, max_x-1);
     std::uniform_int_distribution<> dist_y(0, max_y-1);
 
-    return {dist_x(gen), dist_y(gen)};
+    return point(dist_x(gen), dist_y(gen));
 }

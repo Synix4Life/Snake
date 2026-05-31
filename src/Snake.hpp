@@ -1,40 +1,69 @@
 #pragma once
 
 #include <algorithm>
-#include <stdexcept>
+#include <iostream>
 #include <tuple>
 #include <vector>
 #include <set>
 
 #include "Essentials.hpp"
 
+
+// --------------- CLASSES --------------- //
+
 class Snake{
-        std::vector<std::tuple<int,int>> parts;
+        std::vector<point> parts;
         Direction direction;
-        std::tuple<int, int> head;
+        point head;
     
     public:
-        Snake(std::tuple<int, int> start_pos, enum Direction direction){
-            parts.push_back(start_pos);
-            this->head = start_pos;
+        // - - - - - - - - Constructor - - - - - - - - //
+        
+        /**
+         * Constructor
+         * @param start_X Start x value
+         * @param start_y Start y value
+         * @param direction Direction
+         */
+        Snake(int start_x, int start_y, enum Direction direction){
+            auto p = point(start_x, start_y);
+            parts.push_back(p);
+            this->head = p;
             this->direction = direction;
         }
 
+        // - - - - - - - - Methods - - - - - - - - //
+
+        /**
+         * Update the snakes position
+         * @param is_new If the apple has been collected in the last iteration
+         */
         void update(const bool is_new) noexcept;
 
+        /**
+         * Change direction
+         * @param new_dir New direction
+         */
         void change_dir(const enum Direction new_dir) noexcept{
             direction = new_dir; 
         }
 
-        [[nodiscard]] std::vector<std::tuple<int, int>> get() const noexcept{ 
-            return parts; 
-        }
+        /**
+         * Order the set of points
+         * @return The ordered point set
+         */
+        [[nodiscard]] std::vector<point> order();
 
-        std::tuple<int, int> operator[](const int pos) const{
-            if(pos >= parts.size()){
-                throw std::runtime_error("Illegal Access");
-            }
-            return parts[pos];
+        /**
+         * Checks if the snake collides with itself
+         * @return If the snake collides
+         */
+        [[nodiscard]] bool snake_collision() const noexcept;
+
+        // - - - - - - - Getter-like - - - - - - - //
+
+        [[nodiscard]] std::vector<point> get() const noexcept{ 
+            return parts; 
         }
         
         [[nodiscard]] int size() const noexcept{ 
@@ -45,11 +74,13 @@ class Snake{
             return direction; 
         }
 
-        [[nodiscard]] std::tuple<int, int> get_head() const noexcept{
-            return head;
-        }
+        [[nodiscard]] point get_head() const noexcept{ return head; }
         
-        [[nodiscard]] std::vector<std::tuple<int, int>> order();
-
-        [[nodiscard]] bool snake_collision() const noexcept;
+        point operator[](const int pos) const{
+            if(pos >= parts.size()){
+                std::cout << "Illegal snake access";
+                exit(1);
+            }
+            return parts[pos];
+        }
 };
