@@ -1,5 +1,9 @@
 #pragma once
 
+// ------------------------------------------------------ //
+// ---------------------- IMPORTS ----------------------- //
+// ------------------------------------------------------ //
+
 #include <algorithm>
 #include <iostream>
 #include <tuple>
@@ -9,15 +13,13 @@
 #include "Essentials.hpp"
 
 
-// --------------- CLASSES --------------- //
+// ------------------------------------------------------ //
+// ---------------------- CLASSES ----------------------- //
+// ------------------------------------------------------ //
 
-class Snake{
-        std::vector<point> parts;
-        Direction direction;
-        point head;
-    
+class Snake{   
     public:
-        // - - - - - - - - Constructor - - - - - - - - //
+        // --------------- CONSTRUCTOR --------------- //
         
         /**
          * Constructor
@@ -32,7 +34,7 @@ class Snake{
             this->direction = direction;
         }
 
-        // - - - - - - - - Methods - - - - - - - - //
+        // --------------- METHODS --------------- //
 
         /**
          * Update the snakes position
@@ -52,7 +54,7 @@ class Snake{
          * Order the set of points
          * @return The ordered point set
          */
-        [[nodiscard]] std::vector<point> order();
+        [[nodiscard]] std::vector<point> sort();
 
         /**
          * Checks if the snake collides with itself
@@ -60,7 +62,7 @@ class Snake{
          */
         [[nodiscard]] bool snake_collision() const noexcept;
 
-        // - - - - - - - Getter-like - - - - - - - //
+        // --------------- MEMBER GETTER --------------- //
 
         [[nodiscard]] std::vector<point> get() const noexcept{ 
             return parts; 
@@ -76,6 +78,9 @@ class Snake{
 
         [[nodiscard]] point get_head() const noexcept{ return head; }
         
+        /**
+         * Operator[] override for direct part accessing
+         */
         point operator[](const int pos) const{
             if(pos >= parts.size()){
                 std::cout << "Illegal snake access";
@@ -83,4 +88,11 @@ class Snake{
             }
             return parts[pos];
         }
+
+    protected:
+        // --------------- MEMBER VARIABLES --------------- //
+    
+        std::vector<point> parts;
+        Direction direction;
+        point head;
 };

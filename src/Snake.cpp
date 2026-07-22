@@ -1,12 +1,18 @@
 #include "Snake.hpp"
 
+// ------------------------------------------------------ //
+// ---------------------- IMPORTS ----------------------- //
+// ------------------------------------------------------ //
+
 #include <algorithm>
 #include <tuple>
 #include <vector>
 #include <set>
 
 
-// --------------- METHODS --------------- //
+// ------------------------------------------------------ //
+// ---------------------- METHODS ----------------------- //
+// ------------------------------------------------------ //
 
 void Snake::update(const bool is_new) noexcept{
     int x = (direction == RIGHT) ? parts[0].x +1 : ( (direction == LEFT) ? parts[0].x-1 : parts[0].x ); 
@@ -18,40 +24,15 @@ void Snake::update(const bool is_new) noexcept{
     }
 }
 
-[[nodiscard]] std::vector<point> Snake::order(){           
-    std::vector<point> res;
-    std::set<point> seen;
-    for (const point& element : parts) {
-            if (seen.find(element) != seen.end()) {
-                continue;
-            }
-            seen.insert(element);                    
-            bool inserted = false;
+[[nodiscard]] std::vector<point> Snake::sort()
+{
+    std::vector<point> res = parts;
 
-            for (size_t i = 0; i < res.size(); ++i) {
-                if (element.y < res[i].y) {
-                    res.insert(res.begin() + (int)i, element);
-                    inserted = true;
-                    break;
-                }
-                else if (element.y == res[i].y) {
-                    if (element.x < res[i].x) {
-                        res.insert(res.begin() + (int)i, element);
-                        inserted = true;
-                        break;
-                    }
-                    else if (i + 1 == res.size() || element.x < res[i + 1].x) {
-                        res.insert(res.begin() + (int)i + 1, element);
-                        inserted = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!inserted) {
-                res.push_back(element);
-            }
-        }
+    std::sort(res.begin(), res.end(),
+        [](const point& a, const point& b)
+        {
+            return std::tie(a.y, a.x) < std::tie(b.y, b.x);
+        });
 
     return res;
 }

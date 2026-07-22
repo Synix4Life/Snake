@@ -6,4 +6,4 @@ build/
 # ----- FILES ----- # 
 .gitattributes
 # Makefile used earlier, replaced by CMakeLists.txt
-Makefile/
+Makefile

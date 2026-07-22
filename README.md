@@ -3,7 +3,7 @@
 #### General
 
 ![License](https://img.shields.io/badge/License-MIT-%23f34b7d.svg?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-2.3.0-%23f34b7d.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-2.3.1-%23f34b7d.svg?style=for-the-badge)
 
 #### Languages
 

@@ -1,13 +1,18 @@
 #include "Field.hpp"
 
+// ------------------------------------------------------ //
+// ---------------------- IMPORTS ----------------------- //
+// ------------------------------------------------------ //
+
 #include <algorithm>
 #include <tuple>
 
 #include "Essentials.hpp"
-#include "Global.h"
 
 
-// --------------- METHODS --------------- //
+// ------------------------------------------------------ //
+// ---------------------- METHODS ----------------------- //
+// ------------------------------------------------------ //
 
 void Field::set_apple(){
     bool touch;
@@ -25,7 +30,7 @@ void Field::set_apple(){
     }while(touch);
 }
 
-void Field::check_and_set(Direction dir){
+int Field::check_and_set(Direction dir){
     bool got_apple = false;
     for(int i=0; i<snake.size(); i++){
         point current = snake[i];
@@ -35,9 +40,9 @@ void Field::check_and_set(Direction dir){
             break;
         }
     }
-    if(out_of_bounds(snake[0])) breakFlag = true;
+    if(out_of_bounds(snake[0])) return 1;
     if(valid_dir(snake.get_direction(), dir)) snake.change_dir(dir);
-    if(snake.snake_collision()){ breakFlag = true; }
+    if(snake.snake_collision()){ return 1; }
     snake.update(got_apple);
-    if(got_apple && dynamic_speed){ adjust_speed(); }
+    return 0;
 }
