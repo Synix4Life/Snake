@@ -39,3 +39,6 @@
       - Refactoring
       - Simplifying
       - Docstrings added & improved
+    
+    - $\textsf{\color{#f34b7d}Version 2.3.2}$
+      - Added docker support

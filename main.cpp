@@ -39,7 +39,7 @@ int main(){
         else if(c == 's'){ dir = DOWN; }
         else if(c == 'd'){ dir = RIGHT; }
         
-        if( c == 'x' || field.check_and_set(dir) ){ running = false; }
+        if( c == 'x' || c == 'q' || field.check_and_set(dir) ){ running = false; }
         
         draw(field, running);
 
